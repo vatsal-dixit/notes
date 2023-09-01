@@ -23,7 +23,7 @@ class App extends React.Component{
 
   getDate = () => {
     let currentDate = new Date();
-    let day = currentDate.getDay();
+    let day = currentDate.getDate();
     let month = currentDate.getMonth() + 1;
     let year = currentDate.getFullYear();
     return `${day < 10 ? `0${day}`: `${day}`}/${month < 10 ? `0${month}`: `${month}`}/${year}`
