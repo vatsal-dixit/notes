@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import List from './Components/list';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component{
+  constructor(){
+    super();
+    this.count = 0;
+    this.state = {notes : []};
+  }
+
+  addNote = (test) => {
+    let newDate = this.getDate();
+    let newNote = {
+      id : this.count++,
+      text : test,
+      date : newDate
+    }
+    this.setState({notes : [...this.state.notes , newNote]});
+  }
+
+  
+
+  getDate = () => {
+    let currentDate = new Date();
+    let day = currentDate.getDay();
+    let month = currentDate.getMonth() + 1;
+    let year = currentDate.getFullYear();
+    return `${day < 10 ? `0${day}`: `${day}`}/${month < 10 ? `0${month}`: `${month}`}/${year}`
+  }
+
+
+  render(){
+    return(
+      <div className='container'>
+        <List notes = {this.state.notes} handleADD = {this.addNote}></List>
+      </div>
+    )
+  }
 }
 
 export default App;
